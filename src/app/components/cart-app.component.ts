@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../models/product';
 import { CatalogoComponent } from './catalogo/catalogo.component';
-import { CartComponent } from './cart/cart.component';
 import { CartItem } from '../models/cartItem';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'cart-app',
   standalone: true,
-  imports: [CatalogoComponent,NavbarComponent],
+  imports: [CatalogoComponent,NavbarComponent,RouterOutlet],
   templateUrl: './cart-app.component.html'
 })
 export class CartAppComponent implements OnInit {
@@ -28,7 +28,7 @@ export class CartAppComponent implements OnInit {
     this.items = JSON.parse(sessionStorage.getItem('cart') || '[]') ;
     this.calculateTotal();
   }
-
+  
   onAddCard(product:Product):void
     {
       const hasItem =this.items.find(item=>item.product.id === product.id);
