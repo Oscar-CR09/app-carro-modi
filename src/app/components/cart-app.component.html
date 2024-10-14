@@ -1,4 +1,4 @@
-<navbar [items]="items" />
+<navbar [items]="items" [total]="total"/>
 
 <div class="container my-4">
 
@@ -7,4 +7,5 @@
   (productEventEmiter)="onAddCard($event)" />
 
   <router-outlet> </router-outlet>
+  
 </div>

@@ -20,7 +20,7 @@ export class CartAppComponent implements OnInit {
 
   total:number = 0;
 
-  constructor(private service:ProductService){
+  constructor(private sharingDataService:SharingDataService, private service:ProductService){
 
   }
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class CartAppComponent implements OnInit {
     this.items = JSON.parse(sessionStorage.getItem('cart') || '[]') ;
     this.calculateTotal();
   }
-  
+
   onAddCard(product:Product):void
     {
       const hasItem =this.items.find(item=>item.product.id === product.id);
@@ -50,8 +50,7 @@ export class CartAppComponent implements OnInit {
 
     }
 
-    onDeleteCart(id:number):void{
-
+    onDeleteCart():void{
       this.items=this.items.filter(item=>item.product.id !== id);
       if(this.items.length == 0){
         sessionStorage.removeItem("cart");

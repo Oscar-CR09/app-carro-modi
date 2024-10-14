@@ -13,7 +13,7 @@
         <li class="nav-item">
           <a
           [routerLink]="['/cart']"
-          [state]="{items:items}"
+          [state]="{items:items, total: total}"
           class="nav-link"
           href="#"
           role="button"> Cart ({{items.length}}) </a>
