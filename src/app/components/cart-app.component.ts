@@ -5,6 +5,7 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
 import { CartItem } from '../models/cartItem';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterOutlet } from '@angular/router';
+import { SharingDataService } from '../services/sharing-data.service';
 
 @Component({
   selector: 'cart-app',
@@ -51,17 +52,18 @@ export class CartAppComponent implements OnInit {
     }
 
     onDeleteCart():void{
-      this.items=this.items.filter(item=>item.product.id !== id);
-      if(this.items.length == 0){
-        sessionStorage.removeItem("cart");
-        sessionStorage.clear();
+      this.sharingDataService.idProductEventEmiter.subscribe (id => {
+        this.items=this.items.filter(item=>item.product.id !== id);
+        if(this.items.length == 0){
+          sessionStorage.removeItem("cart");
+          sessionStorage.clear();
 
-      }
-      this.calculateTotal();
-      this.saveSession();
-
-
+        }
+        this.calculateTotal();
+        this.saveSession();
+      })
     }
+
     calculateTotal():void{
       this.total = this.items.reduce((accumulator, item)=> accumulator + item.quality * item.product.price,0);
 
